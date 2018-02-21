@@ -12,7 +12,8 @@ constructor(props){
   this.state = {
     show: this.props.showw,
     cast:[],
-    trailers: []
+    trailers: [],
+    loading:true
   }
   this.handleClose = this.handleClose.bind(this)
 }
@@ -21,11 +22,12 @@ componentDidMount(){
   axios.get('https://api.themoviedb.org/3/movie/'+this.props.articles.id+'/videos?api_key=b6014b39e92000bb705eb8fdbbb9d11d&language=en-US')
   .then((re)=>{
    this.setState({trailers:re.data.results})
+   
    //console.log(this.state.trailers);
   })
   axios.get('https://api.themoviedb.org/3/movie/'+this.props.articles.id+'/credits?api_key=b6014b39e92000bb705eb8fdbbb9d11d&language=en-US')
   .then((r)=>{
-  this.setState({cast:r.data.cast})
+  this.setState({cast:r.data.cast,loading:false})
   //console.log(nextProps.articles.title, nextState);
   })
 }/*
@@ -37,9 +39,6 @@ componentWillUpdate(){//öğe açılınca öncekini kapattığında şimdikini �
 }
 */
 componentWillMount(){
-  this.props.fetchData("/bankAccount/list", "fetch_bank_accounts");
-  let formData = {}
-  console.log("cevap"+formData.bank.opening_balance)
 }
     componentWillReceiveProps(nextProps, nextState){//sadece başlangıçta bir önceki öğeyi gösteriyor
       alert("willreceiveden dolayı")
@@ -50,7 +49,7 @@ componentWillMount(){
       })
       axios.get('https://api.themoviedb.org/3/movie/'+nextProps.articles.id+'/credits?api_key=b6014b39e92000bb705eb8fdbbb9d11d&language=en-US')
       .then((r)=>{
-      this.setState({cast:r.data.cast})
+      this.setState({cast:r.data.cast,loading:false})
       })
     }
     
@@ -62,7 +61,7 @@ componentWillMount(){
     render(){
       
       const {articles} = this.props
-      const {cast,trailers} = this.state// süslü parantezleri sakın unutma,okumuyor yoksa!
+      const {cast,trailers,loading} = this.state// süslü parantezleri sakın unutma,okumuyor yoksa!
       let lCast,lTrailers;
       if(trailers){
         lTrailers =trailers.map((i,index)=>(
@@ -70,7 +69,10 @@ componentWillMount(){
         ))
       }
     
-      if(cast){
+      if(loading){
+        return <h1>Loading</h1>
+      }
+      else{
         lCast = cast.map((i,index)=>{
          if(i.profile_path){
           return(
@@ -86,12 +88,9 @@ componentWillMount(){
             <br/>
             </Col>
           )}
-          return 1 
+          return  
         }
     )
-      }
-      else{
-        lCast = <div>Loading</div>
       }
     return(
     <div>

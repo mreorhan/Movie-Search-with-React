@@ -28,7 +28,7 @@ class About extends Component{
         </Button>
 <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>Modal headingd</Modal.Title>
           </Modal.Header>
           <Modal.Body>
            <h4>Popover in a modal</h4>

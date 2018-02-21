@@ -25,7 +25,7 @@ body{
     margin-bottom: 30px;
     overflow: hidden;
     position: relative;
-    margin: -15px -15px 0px;
+    margin: -16px -16px 0px -15px!important;
     padding: 15px;
 }
 .customMediaBody{

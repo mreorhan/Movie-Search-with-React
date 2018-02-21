@@ -134,7 +134,8 @@ else{
            {error}
             <div>{data}</div>
             {Sugar.Date.format(new Date(), '%d.%m.%Y - %R')}
-            <Route path="/movies/details2/:id" component={PP} articles={popularfilms.find(g => g.id == this.props.id )} showw="true"/> )} />
+            <Route path="/movies/details2/:id" render={({match}) => (
+                  <MoviesDetail2 articles={popularfilms.find(g => g.id == match.params.id )} showw="true"/> )} /> 
             <Route path="/movies/details/:id" render={({match}) => (
                   <MoviesDetail articles={articles.find(g => g.id == match.params.id )} showw="true"/>
                 )} />

@@ -11,7 +11,7 @@ constructor(props){
   this.state = {
     show: this.props.showw
   }
-
+  localStorage('token','tokendesc')
   this.handleClose = this.handleClose.bind(this)
 }
     componentWillReceiveProps(){
